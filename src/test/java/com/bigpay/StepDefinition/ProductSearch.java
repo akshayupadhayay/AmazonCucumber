@@ -19,19 +19,22 @@ public class ProductSearch extends CommonMethods {
         Assert.assertTrue(logo);
     }
 
-    @When("Enter text in search bar on home page")
-    public void enter_text_in_search_bar_on_home_page(String laptop) {
+    @When("^Enter \"([^\"]*)\" in search bar on home page")
+    public void enter_text_in_search_bar_on_home_page(String text) throws InterruptedException {
 
         assert search.searchBox.isEnabled();
         assert search.searchButton.isEnabled();
-        search.sendItem(laptop);
+        search.sendItem(text);
+        Thread.sleep(5000);
+        assert search.searchBox.getText().contains("laptop");
     }
 
     @Then("Select first search from the auto-complete and click enter")
-    public void select_first_search_from_the_auto_complete(String laptop) {
+    public void select_first_search_from_the_auto_complete() throws InterruptedException {
         search.selectFirstElement();
-        assert search.searchBox.getText().equals(laptop);
+        Thread.sleep(5000);
         search.searchClick();
+        Thread.sleep(5000);
     }
 
     @And("Land on the product page and close browser")

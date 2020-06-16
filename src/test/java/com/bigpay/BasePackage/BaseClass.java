@@ -16,7 +16,7 @@ public class BaseClass {
 
         System.setProperty(ChromeDriverService.CHROME_DRIVER_LOG_PROPERTY, "true");
 
-        if ("chrome".equals(ConfigsReader.getProperty("browser").toLowerCase())) {
+        if (ConfigsReader.getBrowser("browser").toLowerCase().equals("chrome")) {
             WebDriverManager.chromedriver().setup();
              driver = new ChromeDriver();
 
@@ -25,7 +25,7 @@ public class BaseClass {
         }
 
         driver.manage().timeouts().implicitlyWait(Constants.IMPLICIT_WAIT_TIME, TimeUnit.SECONDS);
-        driver.get(ConfigsReader.getProperty("url"));
+        driver.get(ConfigsReader.getUrl("url"));
         PageLaunch.initialize();
         driver.manage().window().maximize();
         driver.manage().window().fullscreen();
